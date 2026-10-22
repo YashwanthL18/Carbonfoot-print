@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoTrack - Carbon Footprint Tracker</title>
+    <link rel="stylesheet" href="css/home-styles.css" />
+</head>
+<body>
+    <!-- 1️⃣ HEADER / NAVIGATION BAR (sticky) -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">🌍</span>
+                <span class="logo-text">EcoTrack</span>
+            </div>
+            <nav class="navbar-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="/dashboard" class="nav-link">Calculator</a>
+                <a href="#chatbot" class="nav-link">Chat</a>
+            </nav>
+            <div class="navbar-auth">
+                <a href="/login" class="btn btn-login">Login</a>
+                <a href="/register" class="btn btn-register">Register</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2️⃣ HERO SECTION -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Track. Reduce. Sustain.</h1>
+            <p class="hero-subtitle">Take charge of your carbon footprint and help save the planet.</p>
+            <a href="/dashboard" class="btn btn-hero">Calculate My Footprint</a>
+        </div>
+        <div class="hero-background">
+            <div class="animated-globe"></div>
+            <div class="wave wave-1"></div>
+            <div class="wave wave-2"></div>
+            <div class="wave wave-3"></div>
+        </div>
+    </section>
+
+    <!-- 3️⃣ ABOUT SECTION -->
+    <section id="about" class="about">
+        <div class="about-container">
+            <h2 class="section-title">About EcoTrack</h2>
+            <p class="about-intro">
+                EcoTrack is an AI-powered carbon footprint tracker that helps users measure and reduce their 
+                emissions from travel, energy, and food. It supports UN SDG 13: Climate Action by promoting 
+                behavior-driven sustainability.
+            </p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"></div>
+                    <h3>Measure Your Footprint</h3>
+                    <p>Get accurate insights into your carbon emissions across all major categories.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"></div>
+                    <h3>Get AI-Based Tips</h3>
+                    <p>Receive personalized recommendations to reduce your environmental impact.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"></div>
+                    <h3>Track Your Progress</h3>
+                    <p>Monitor your improvements over time and celebrate milestones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4️⃣ HOW IT WORKS SECTION -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="how-it-works-container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">🚗</div>
+                    <h3>Enter Your Details</h3>
+                    <p>Input your daily activity information: travel, energy use, and diet preferences.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">🧮</div>
+                    <h3>System Calculates</h3>
+                    <p>Our algorithm computes your total CO₂ emissions using industry-standard factors.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">🌿</div>
+                    <h3>Get Recommendations</h3>
+                    <p>Receive actionable tips tailored to reduce your carbon footprint effectively.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 6️⃣ CHATBOT SECTION (integrated via floating widget) -->
+    <section id="chatbot" class="chatbot-section">
+        <div class="chatbot-container">
+            <h2 class="section-title">Need Help?</h2>
+            <p class="chatbot-intro">
+                Our AI-powered chatbot is available 24/7 to answer your questions about carbon footprints and 
+                sustainability. Click the chat icon in the bottom-right corner to get started!
+            </p>
+            <div class="chatbot-preview">
+                <div class="chat-bubble bot-bubble">
+                    Hi! I'm EcoBot 🌿 — Ask me anything about climate change or your carbon footprint.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 EcoTrack. All rights reserved. Supporting UN SDG 13: Climate Action.</p>
+            <div class="footer-links">
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+                <a href="/dashboard">Dashboard</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chatbot Widget (from chat.js) -->
+    <script src="js/chat.js"></script>
+    <script>
+        // Home page button wiring: keep UX smooth and make all buttons functional.
+        document.addEventListener('DOMContentLoaded', () => {
+            async function isAuthenticated(){
+                try{
+                    const res = await fetch('/api/auth-status', { credentials: 'include' });
+                    if(!res.ok) return false;
+                    const data = await res.json();
+                    return data && data.authenticated;
+                }catch(e){
+                    return false;
+                }
+            }
+
+            // Smooth-scroll for internal nav links (Home, About, Chat)
+            document.querySelectorAll('a.nav-link[href^="#"]').forEach(a => {
+                a.addEventListener('click', (e) => {
+                    const target = a.getAttribute('href').slice(1);
+                    const el = document.getElementById(target);
+                    if(el){
+                        e.preventDefault();
+                        el.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Calculator links / CTA should require auth: if logged in -> go to calculator, else -> login
+            const calculatorSelectors = Array.from(document.querySelectorAll('a[href="/dashboard"], .btn-hero'));
+            calculatorSelectors.forEach(el => {
+                el.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    const auth = await isAuthenticated();
+                    if(auth){
+                        // logged in -> show calculator (index or dashboard)
+                        window.location.href = '/';
+                    } else {
+                        // not logged in -> show login page first
+                        window.location.href = '/login';
+                    }
+                });
+            });
+
+            // Footer dashboard link should behave similarly
+            const footerDash = document.querySelector('.footer-links a[href="/dashboard"]');
+            if(footerDash){
+                footerDash.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    const auth = await isAuthenticated();
+                    window.location.href = auth ? '/dashboard' : '/login';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

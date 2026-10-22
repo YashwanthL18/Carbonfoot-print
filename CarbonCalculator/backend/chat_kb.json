@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "question": "What is a carbon footprint?",
+    "answer": "A carbon footprint measures the total greenhouse gas emissions caused directly and indirectly by an individual, organization, event, or product. It's usually expressed in kilograms of CO₂-equivalent (kg CO₂e)."
+  },
+  {
+    "id": 2,
+    "question": "How can I reduce my travel emissions?",
+    "answer": "To reduce travel emissions: use public transit, cycle or walk for short trips, carpool when possible, choose trains over short-haul flights, and maintain your vehicle for better fuel efficiency."
+  },
+  {
+    "id": 3,
+    "question": "How does diet affect my footprint?",
+    "answer": "Food choices matter: red meat (especially beef) has a high carbon intensity. Eating more plant-based meals, reducing food waste, and choosing local seasonal produce lower your food footprint."
+  },
+  {
+    "id": 4,
+    "question": "How do I save energy at home?",
+    "answer": "Save energy by switching to LED bulbs, improving insulation, using programmable thermostats, and choosing energy-efficient appliances. Small changes like reducing standby power can add up."
+  },
+  {
+    "id": 5,
+    "question": "What is the calculator for?",
+    "answer": "The calculator helps estimate your annual carbon footprint across travel, energy, and food so you can see where to focus reductions and track progress over time."
+  },
+  {
+    "id": 6,
+    "question": "How accurate is the calculator?",
+    "answer": "The calculator provides estimates based on average emission factors. It's useful for understanding relative impacts and trends, but not a precise measurement. For precise audits, specialized tools or meters are needed."
+  },
+  {
+    "id": 7,
+    "question": "Can I track progress over time?",
+    "answer": "Yes — if you create an account and save your calculations, the dashboard shows history, trends, and quick stats like trees saved and reduction rate."
+  },
+  {
+    "id": 8,
+    "question": "Why is reducing emissions important?",
+    "answer": "Reducing emissions helps slow climate change, improves air quality, and often leads to cost savings and better health. Collective small actions add up."
+  }
+]

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Carbon Calculator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="robots" content="noindex">
+    <style>
+        /* Small helper styles for admin view */
+        .admin-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:1rem }
+        .admin-card { padding:1rem; border-radius:8px; background:linear-gradient(180deg,#fff,#f7fff7); box-shadow:var(--box-shadow) }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="brand"><i class="fas fa-leaf"></i> Carbon Calculator</a>
+            <nav class="main-nav">
+                <a href="dashboard.html" class="nav-link">User Dashboard</a>
+                <a href="admin_dashboard.html" class="nav-link active">Admin</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="card">
+            <h1>Admin Dashboard</h1>
+            <p>Overview: total users, average footprint, total CO₂ reduced.</p>
+            <div class="admin-grid">
+                <div class="admin-card">
+                    <h3>Total Users</h3>
+                    <p id="admin-users">Loading...</p>
+                </div>
+                <div class="admin-card">
+                    <h3>Average Footprint</h3>
+                    <p id="admin-average">Loading...</p>
+                </div>
+                <div class="admin-card">
+                    <h3>Total CO₂ Reduced</h3>
+                    <p id="admin-total-reduced">Loading...</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Recent Activity</h2>
+            <ul id="admin-activities">
+                <li>Loading...</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About</h3>
+                <ul>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:support@carboncalc.com">Email Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 Carbon Calculator. All rights reserved.</p></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html>

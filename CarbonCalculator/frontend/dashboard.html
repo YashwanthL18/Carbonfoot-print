@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - Carbon Calculator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="brand">
+                <i class="fas fa-leaf"></i>
+                <span>Carbon Calculator</span>
+            </a>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-calculator"></i>
+                    Calculator
+                </a>
+                <a href="dashboard.html" class="nav-link active">
+                    <i class="fas fa-chart-line"></i>
+                    Dashboard
+                </a>
+                <a href="profile.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a>
+                <a href="login.html" class="nav-link" id="login-link">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </a>
+                <a href="register.html" class="nav-link" id="register-link">
+                    <i class="fas fa-user-plus"></i>
+                    Register
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="dashboard-header card">
+            <div class="welcome-message">
+                <h1><i class="fas fa-chart-line"></i> My Carbon Dashboard</h1>
+                <p>Track your progress and see your impact on the environment.</p>
+            </div>
+            <div class="quick-stats grid">
+                <div class="stat-card">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Current Score</h3>
+                    <p id="carbon-score">0 kg CO₂/day</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Reduction</h3>
+                    <p id="reduction-rate">0%</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-tree"></i>
+                    <h3>Trees Saved</h3>
+                    <p id="trees-saved">0</p>
+                </div>
+            </div>
+        </div>
+
+        <section id="progress-chart-container" class="card">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-line"></i> Your Footprint Over Time</h2>
+                <p>See how your efforts are making an impact!</p>
+            </div>
+            <div class="chart-container" style="height: 400px;">
+                <canvas id="progress-line-chart"></canvas>
+            </div>
+        </section>
+
+        <div class="grid">
+            <section id="activities" class="card">
+                <h2><i class="fas fa-list-check"></i> Recent Activities</h2>
+                <ul id="activities-list" class="activities-list">
+                    <li>Loading activities...</li>
+                </ul>
+                <button class="btn-primary" onclick="location.href='activity_input.html'">
+                    <i class="fas fa-plus"></i> Add New Activity
+                </button>
+            </section>
+
+            <section id="recommendations" class="card">
+                <h2><i class="fas fa-lightbulb"></i> Personalized Tips</h2>
+                <ul id="recommendations-list" class="recommendations-list">
+                    <li>Loading recommendations...</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Impact</a></li>
+                    <li><a href="#">Team</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Carbon Guide</a></li>
+                    <li><a href="#">Eco Tips</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:support@carboncalc.com">Email Us</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Feedback</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Carbon Calculator. All rights reserved.</p>
+        </div>
+    </footer>
+    
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="js/charts.js"></script>
+        <script>
+            // Developer helper: only populate sample data if none exists yet.
+            // This avoids an infinite reload loop in development.
+            (function() {
+                try {
+                    if (!localStorage.getItem('footprint_history')) {
+                        const sample = [
+                            { created_at: new Date(Date.now()-7*24*3600*1000).toISOString(), total_footprint: 12.3, travel_footprint: 5.2, energy_footprint: 4.1, food_footprint: 3.0 },
+                            { created_at: new Date(Date.now()-6*24*3600*1000).toISOString(), total_footprint: 11.8, travel_footprint: 4.8, energy_footprint: 4.0, food_footprint: 3.0 },
+                            { created_at: new Date(Date.now()-5*24*3600*1000).toISOString(), total_footprint: 10.9, travel_footprint: 4.0, energy_footprint: 3.9, food_footprint: 3.0 },
+                            { created_at: new Date().toISOString(), total_footprint: 8.8, travel_footprint: 3.0, energy_footprint: 3.0, food_footprint: 2.8 }
+                        ];
+                        localStorage.setItem('footprint_history', JSON.stringify(sample));
+                        // Reload once so the chart and UI pick up the new data. This will not run again
+                        // because the presence check above prevents re-populating.
+                        location.reload();
+                    }
+                } catch (e) {
+                    // ignore any storage errors
+                    console.warn('Could not set sample data:', e);
+                }
+            })();
+        </script>
+        <!-- If you prefer to manually populate sample data, open the browser console and run the helper below.
+             Example (paste into console):
+             const sample = [{created_at: new Date().toISOString(), total_footprint: 10, travel_footprint:3, energy_footprint:4, food_footprint:3}];
+             localStorage.setItem('footprint_history', JSON.stringify(sample));
+             location.reload();
+    -->
+    <script src="js/chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+Flask
+flask-cors
+flask-sqlalchemy
+scikit-learn
+pandas
+werkzeug
+pytest

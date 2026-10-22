@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Carbon Calculator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="robots" content="noindex">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="brand">
+                <i class="fas fa-leaf"></i>
+                <span>Carbon Calculator</span>
+            </a>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-calculator"></i>
+                    Calculator
+                </a>
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-chart-line"></i>
+                    Dashboard
+                </a>
+                <a href="profile.html" class="nav-link active">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a>
+                <a href="login.html" class="nav-link" id="login-link">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </a>
+                <a href="register.html" class="nav-link" id="register-link">
+                    <i class="fas fa-user-plus"></i>
+                    Register
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="profile-container">
+        <div class="profile-header">
+            <div class="profile-image-container">
+                <img id="profile-image" src="images/default-avatar.png" alt="Profile Picture">
+                <div class="image-upload">
+                    <label for="image-upload" class="upload-button">
+                        <i class="fas fa-camera"></i>
+                    </label>
+                    <input type="file" id="image-upload" accept="image/*" hidden>
+                </div>
+            </div>
+        </div>
+
+        <section class="profile-details">
+            <div class="profile-card">
+                <h2>Personal Information</h2>
+                <div class="profile-info">
+                    <div class="info-group">
+                        <label><i class="fas fa-user"></i> Name</label>
+                        <p id="user-name">Loading...</p>
+                    </div>
+                    <div class="info-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <p id="user-email">Loading...</p>
+                    </div>
+                    <div class="info-group">
+                        <label><i class="fas fa-map-marker-alt"></i> Location</label>
+                        <p id="user-location">Loading...</p>
+                    </div>
+                    <div class="info-group">
+                        <label><i class="fas fa-calendar-alt"></i> Joined</label>
+                        <p id="user-joined">Loading...</p>
+                    </div>
+                </div>
+                <button id="edit-profile" class="btn-primary">
+                    <i class="fas fa-edit"></i> Edit Profile
+                </button>
+            </div>
+
+            <div class="profile-card">
+                <h2>Carbon Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Total Savings</h3>
+                        <p id="carbon-savings">0 kg CO2</p>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Calculations</h3>
+                        <p id="total-calculations">0</p>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-tree"></i>
+                        <h3>Trees Saved</h3>
+                        <p id="trees-saved-profile">0</p>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Achievement Level</h3>
+                        <p id="achievement-level">Beginner</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About</h3>
+                <ul>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">Team</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Eco Tips</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="mailto:support@carboncalc.com">Email Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Carbon Calculator. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/profile.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html>

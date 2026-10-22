@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Carbon Calculator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="brand">
+                <i class="fas fa-leaf"></i>
+                <span>Carbon Calculator</span>
+            </a>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-calculator"></i>
+                    Calculator
+                </a>
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-chart-line"></i>
+                    Dashboard
+                </a>
+                <a href="profile.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a>
+                <a href="login.html" class="nav-link" id="login-link">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </a>
+                <a href="register.html" class="nav-link" id="register-link">
+                    <i class="fas fa-user-plus"></i>
+                    Register
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <h2><i class="fas fa-user-plus"></i> Create Account</h2>
+            <form id="register-form" class="card" method="POST">
+                <div class="form-group">
+                    <label for="name">
+                        <i class="fas fa-user"></i> Full Name
+                    </label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> Email
+                    </label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">
+                        <i class="fas fa-lock"></i> Confirm Password
+                    </label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </form>
+            <p class="form-footer">
+                Already have an account? <a href="login.html">Login here</a>
+            </p>
+        </div>
+    </main>
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Impact</a></li>
+                    <li><a href="#">Team</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Carbon Guide</a></li>
+                    <li><a href="#">Eco Tips</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:support@carboncalc.com">Email Us</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Feedback</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Carbon Calculator. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const raw = sessionStorage.getItem('lastRecommendations');
+        let recs = [];
+        if (raw) {
+            try { recs = JSON.parse(raw); } catch(e){ recs = [] }
+        }
+
+        // The register page doesn't always have a recommendations list; guard the selector
+        const ul = document.getElementById('recs-list');
+        if (!ul) return;
+
+        if (recs.length === 0) {
+            ul.innerHTML = '<li>No recommendations found. Compute your footprint first.</li>';
+            return;
+        }
+
+        recs.forEach((tip, idx) => {
+            const li = document.createElement('li');
+            li.textContent = tip;
+
+            // mark-as-done toggle
+            const btn = document.createElement('button');
+            btn.textContent = 'Mark done';
+            btn.style.marginLeft = '12px';
+            btn.addEventListener('click', () => {
+                li.style.textDecoration = 'line-through';
+                btn.disabled = true;
+                // Optionally store progress in localStorage
+            });
+
+            li.appendChild(btn);
+            ul.appendChild(li);
+        });
+    });
+    </script>
+    <script src="js/chat.js"></script>
+</body>
+</html>

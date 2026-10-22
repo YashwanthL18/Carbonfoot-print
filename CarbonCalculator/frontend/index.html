@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Footprint Calculator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Load config first -->
+    <script src="js/config.js"></script>
+<!-- Then load Google Maps with the API key from config -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${window.config.googleMapsApiKey}&libraries=places&callback=initMaps`;
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+    });
+</script>
+</head>
+</script>
+
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="brand">
+                <i class="fas fa-leaf"></i>
+                <span>Carbon Calculator</span>
+            </a>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-calculator"></i>
+                    Calculator
+                </a>
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-chart-line"></i>
+                    Dashboard
+                </a>
+                <a href="profile.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a>
+                <a href="login.html" class="nav-link" id="login-link">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </a>
+                <a href="register.html" class="nav-link" id="register-link">
+                    <i class="fas fa-user-plus"></i>
+                    Register
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="fade-in">
+        <form id="calculator-form">
+            
+            <fieldset>
+                <legend> Travel (Weekly)</legend>
+                <label for="car-km">Car Driving (km/week):</label>
+                <input type="number" id="car-km" name="car_km" value="0">
+                
+                <label for="car-type">Car Type:</label>
+                <select id="car-type" name="car_type">
+                    <option value="gasoline">Gasoline</option>
+                    <option value="electric">Electric</option>
+                </select>
+
+                <label for="public-transit-km">Public Transit (km/week):</label>
+                <input type="number" id="public-transit-km" name="public_transit_km" value="0">
+            </fieldset>
+
+            <fieldset>
+                <legend> Flights (Yearly)</legend>
+                <label for="flight-hours">Total Flight Hours (per year):</label>
+                <input type="number" id="flight-hours" name="flight_hours" value="0">
+                <label>Find flight distance (optional):</label>
+                <input id="flight-origin" placeholder="Flight Origin">
+                <input id="flight-destination" placeholder="Flight Destination">
+            </fieldset>
+
+            <fieldset>
+                <legend> Energy (Monthly)</legend>
+                <label for="electricity-kwh">Electricity (kWh/month):</label>
+                <input type="number" id="electricity-kwh" name="electricity_kwh" value="0">
+                
+                <label for="natural-gas">Natural Gas (m³/month):</label>
+                <input type="number" id="natural-gas" name="natural_gas" value="0">
+            </fieldset>
+
+            <fieldset>
+                <legend> Food Habits</legend>
+                <label for="diet-type">Diet Type:</label>
+                <select id="diet-type" name="diet_type">
+                    <option value="average">Average (Some Meat)</option>
+                    <option value="meat_lover">Meat Lover</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="vegan">Vegan</option>
+                </select>
+            </fieldset>
+
+            <div class="button-container">
+                <button type="submit" id="calculate-btn" class="btn-primary" data-tooltip="Calculate your carbon footprint">
+                    Calculate My Footprint
+                </button>
+                <div class="progress-bar hidden">
+                    <div class="fill" style="width: 0%"></div>
+                </div>
+            </div>
+        </form>
+
+        <section id="results-container" class="hidden card fade-in">
+            <h2>Your Result</h2>
+            <div class="result-summary">
+                <p>Total Footprint:</p>
+                <h3 id="total-footprint">0.0 tonnes</h3>
+                <p>CO2e per year</p>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="result-pie-chart"></canvas>
+            </div>
+
+            <h3>Personalized Recommendations</h3>
+            <ul id="recommendations-list">
+                </ul>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Impact</a></li>
+                    <li><a href="#">Team</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Carbon Guide</a></li>
+                    <li><a href="#">Eco Tips</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:support@carboncalc.com">Email Us</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Feedback</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Carbon Calculator. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/maps.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/chat.js"></script>
+    <!-- Add loading indicator -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="loader"></div>
+    </div>
+</body>
+</html>
